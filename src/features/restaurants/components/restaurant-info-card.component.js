@@ -5,6 +5,8 @@ import { SvgXml } from "react-native-svg";
 import { Card } from "react-native-paper";
 
 import star from "../../../../assets/star";
+import open from "../../../../assets/open";
+
 const Info = styled.View`
   padding: ${(props) => props.theme.space[3]};
 `;
@@ -39,6 +41,22 @@ const Rating = styled.View`
   padding-bottom: ${(props) => props.theme.space[1]};
 `;
 
+//wraps the rating and open elements so the stars are on the left and the open sign is on the right
+const Section = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+const SectionEnd = styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-end;
+`;
+
+const Open = styled(SvgXml)`
+  flex-direction: row;
+`;
+
 export const RestaurantInfoCard = ({ restaurant = {} }) => {
   const {
     name = "Joku ravintola",
@@ -59,11 +77,16 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
       <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
       <Info>
         <Title>{name}</Title>
-        <Rating>
-          {ratingArray.map(() => (
-            <SvgXml xml={star} width={20} height={20} />
-          ))}
-        </Rating>
+        <Section>
+          <Rating>
+            {ratingArray.map(() => (
+              <SvgXml xml={star} width={20} height={20} />
+            ))}
+          </Rating>
+          <SectionEnd>
+            {isOpenNow && <Open xml={open} width={20} height={20} />}
+          </SectionEnd>
+        </Section>
         <Address>{address}</Address>
       </Info>
     </RestaurantCard>
