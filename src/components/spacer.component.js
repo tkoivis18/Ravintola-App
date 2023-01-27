@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components/native";
+import styled, { useTheme } from "styled-components/native";
 
 //This is a spacer component for view elements that we don't have to
 //use inline styling
@@ -25,11 +25,19 @@ const getVariant = (position, size, theme) => {
   return `${property}:${value}`;
 };
 
+//Android is unable to load getVariant on load. Solution is to seperate the styled.View
+//returned by the Spacer component we pass the variant in SpacerView component immediatly
+const SpacerView = styled.View`
+  ${({ variant }) => variant}
+`;
+
 //get the position and size of the spacer component and run the getVariant function
 //that takes position and size and selects positionVariant&sizeVariant based of what was given
-export const Spacer = styled.View`
-  ${({ position, size, theme }) => getVariant(position, size, theme)}
-`;
+export const Spacer = ({ position, size, children }) => {
+  const theme = useTheme();
+  const variant = getVariant(position, size, theme);
+  return <SpacerView variant={variant}>{children}</SpacerView>;
+};
 
 Spacer.defaultProps = {
   position: "top",
