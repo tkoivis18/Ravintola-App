@@ -4,7 +4,7 @@ import { Text, Image, View } from "react-native";
 import { SvgXml } from "react-native-svg";
 import { Card } from "react-native-paper";
 
-import { Spacer } from "../../../components/spacer.component";
+import { Spacer } from "../../../components/spacer/spacer.component";
 import star from "../../../../assets/star";
 import open from "../../../../assets/open";
 
