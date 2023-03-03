@@ -15,6 +15,8 @@ import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 import { theme } from "./src/infastructure/theme";
 import { RestaurantsScreen } from "./src/features/restaurants/screens/restaurants.screen";
 
+import { restaurantsRequest } from "./src/services/restaurants/restaurants.service";
+
 const Tab = createBottomTabNavigator();
 
 const tabBarIcon =
@@ -32,7 +34,7 @@ const createScreenOptions = ({ route }) => {
 };
 
 const TAB_ICON = {
-  Restaurants: "md-restaurants",
+  Restaurants: "restaurant-outline",
   Map: "md-map",
   Settings: "md-settings",
 };
