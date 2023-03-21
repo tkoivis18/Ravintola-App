@@ -14,17 +14,19 @@ const SearchContainer = styled.View`
 `;
 
 export const RestaurantsScreen = () => {
-  const restaurantsContext = useContext(RestaurantsContext);
-  console.log(restaurantsContext);
-  console.log(restaurantsContext);
+  const { isLoading, err, restaurants } = useContext(RestaurantsContext);
+
   return (
     <SafeArea>
       <SearchContainer>
         <Searchbar />
       </SearchContainer>
       <FlatList
-        data={restaurantsContext.restaurants}
-        renderItem={() => <RestaurantInfoCard />}
+        data={restaurants}
+        renderItem={({ item }) => {
+          console.log(item);
+          return <RestaurantInfoCard restaurant={item} />;
+        }}
         keyExtractor={(item) => item.name}
         contentContainerStyle={{ padding: 16 }}
       />
